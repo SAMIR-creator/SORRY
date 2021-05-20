@@ -10,19 +10,13 @@ module.exports = class BotInfoCommand extends Command {
       name: 'botinfo',
       aliases: ['bot', 'bi'],
       usage: 'botinfo',
-      description: 'Fetches Calypso\'s bot information.',
+      description: 'Fetches bot information.',
       type: client.types.INFO
     });
   }
   run(message) {
     const botOwner = message.client.users.cache.get(message.client.ownerId);
     const prefix = message.client.db.settings.selectPrefix.pluck().get(message.guild.id);
-    const tech = stripIndent`
-      Version     :: ${pkg.version}
-      Library     :: Discord.js v12.3.1
-      Environment :: Node.js v12.16.3
-      Database    :: SQLite
-    `;
     const embed = new MessageEmbed()
       .setTitle(`${message.client.user.username}\'s Bot Information`)
       .setDescription(oneLine`

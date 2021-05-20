@@ -1,5 +1,5 @@
 const Command = require('../Command.js');
-const { MessageEmbed } = require('discord.js');
+const {client, MessageEmbed } = require('discord.js');
 const emojis = require('../../utils/emojis.json');
 const { oneLine, stripIndent } = require('common-tags');
 
@@ -54,7 +54,6 @@ module.exports = class AliasesCommand extends Command {
 
       embed
         .setTitle(`Alias Type: \`${capitalize(type)}\``)
-        .setThumbnail('https://raw.githubusercontent.com/sabattle/CalypsoBot/develop/data/images/Calypso.png')
         .addField(
           `**${emojiMap[type]} [${aliases[type].reduce((a, b) => a + b.split(' ').slice(1).length, 0)}]**`, 
           aliases[type].join('\n')
@@ -76,12 +75,12 @@ module.exports = class AliasesCommand extends Command {
       const prefix = message.client.db.settings.selectPrefix.pluck().get(message.guild.id);
 
       embed
-        .setTitle('Calypso\'s Alias Types')
+        .setTitle(`${message.client.user.username}\'s Alias Types`)
         .setDescription(stripIndent`
           **Prefix:** \`${prefix}\`
           **More Information:** \`${prefix}aliases [command type]\`
         `)
-        .setImage('https://raw.githubusercontent.com/sabattle/CalypsoBot/develop/data/images/Calypso_Title.png')
+        // .setImage('https://raw.githubusercontent.com/sabattle/CalypsoBot/develop/data/images/Calypso_Title.png')
         .setFooter(message.member.displayName, message.author.displayAvatarURL({ dynamic: true }))
         .setTimestamp()
         .setColor(message.guild.me.displayHexColor);
@@ -95,13 +94,6 @@ module.exports = class AliasesCommand extends Command {
             true
           );
       }
-
-      embed.addField(
-        '**Links**', 
-        '**[Invite Me](https://discordapp.com/oauth2/authorize?client_id=416451977380364288&scope=bot&permissions=403008599) | ' +
-        '[Support Server](https://discord.gg/pnYVdut) | ' +
-        '[Repository](https://github.com/sabattle/CalypsoBot)**'
-      );
 
     }
 

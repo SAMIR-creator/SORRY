@@ -35,18 +35,12 @@ module.exports = class StatsCommand extends Command {
       RAM Usage :: ${usedMemMb} MB 
     `;
     const embed = new MessageEmbed()
-      .setTitle('Calypso\'s Statistics')
+      .setTitle(`${message.client.user.username}\'s Statistics`)
       .addField('Commands', `\`${message.client.commands.size}\` commands`, true)
       .addField('Aliases', `\`${message.client.aliases.size}\` aliases`, true)
       .addField('Command Types', `\`${Object.keys(message.client.types).length}\` command types`, true)
       .addField('Client', `\`\`\`asciidoc\n${clientStats}\`\`\``)
       .addField('Server', `\`\`\`asciidoc\n${serverStats}\`\`\``)
-      .addField(
-        'Links', 
-        '**[Invite Me](https://discordapp.com/oauth2/authorize?client_id=416451977380364288&scope=bot&permissions=403008599) | ' +
-        '[Support Server](https://discord.gg/pnYVdut) | ' +
-        '[Repository](https://github.com/sabattle/CalypsoBot)**'
-      )
       .setFooter(message.member.displayName,  message.author.displayAvatarURL({ dynamic: true }))
       .setTimestamp()
       .setColor(message.guild.me.displayHexColor);
